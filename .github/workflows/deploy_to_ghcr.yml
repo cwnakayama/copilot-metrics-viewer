@@ -9,11 +9,15 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: read
   packages: write
 
 jobs:
   push_to_ghcr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout GitHub Action
         uses: actions/checkout@v4
@@ -57,6 +61,9 @@ jobs:
 
   push_sync_to_ghcr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout GitHub Action
         uses: actions/checkout@v4
