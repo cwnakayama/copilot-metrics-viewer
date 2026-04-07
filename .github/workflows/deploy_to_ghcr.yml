@@ -27,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
 
       # Adding below tag any push to main as "latest"
       # To deploy latest, create a release with a semver tag
@@ -36,10 +36,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # this is back a single image, `-with-proxy` is legacy and will be removed
           images: |
             ghcr.io/${{ github.repository }}
-            ghcr.io/${{ github.repository }}-with-proxy
           labels: |
             org.opencontainers.image.title=copilot-metrics-viewer
             org.opencontainers.image.description=Metrics viewer for GitHub Copilot usage
@@ -73,7 +71,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata
         id: meta
